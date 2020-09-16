@@ -2,9 +2,8 @@
 
 #region EDITING INHERITED VARIABLES
 
-image_speed = 0;
-image_index = 0;
-//visible = false;
+// Call default initialization from obj_world_object
+event_inherited();
 
 #endregion
 

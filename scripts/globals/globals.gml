@@ -16,3 +16,16 @@ global.targetFPS = 60;
 // An array with 2 indexes: the width of the camera given it's current aspect ratio, as well as the height for
 // the same aspect. This allows for accurate drawing of GUI elements relative to the four corners of the screen.
 global.cameraSize = [0, 0];
+
+// A grid with the dimensions 2 by n, where n is equal to the total number of world object that exist currently
+// for drawing using the depth sorting system. The grid is sorted by the current Y values of each object every
+// frame.
+global.worldObjects = ds_grid_create(2, 0);
+
+// An array for the inventory that is two-dimensional, with a width of 28 (Maximum number of slots) and a height
+// of 3 (itemID, # of items, and equipped or not).
+for (var i = 0; i < INVENTORY_SIZE; i++){
+	global.invItem[i, 0] = 0;
+	global.invItem[i, 1] = 0;
+	global.invItem[i, 2] = false;
+}

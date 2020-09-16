@@ -18,6 +18,6 @@ hspdFraction = 0;
 vspdFraction = 0;
 
 // Determines how slow the entity pushing the wall will move when pushing against the wall.
-weight = 6;
+weight = 1;
 
 #endregion

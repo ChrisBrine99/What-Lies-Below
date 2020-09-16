@@ -10,5 +10,4 @@ enum Wall{
 	Solid,
 	Destructible,
 	Movable,
-	Moving,
 }
