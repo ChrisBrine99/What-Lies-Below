@@ -1,15 +1,24 @@
 {
-    "id": "0584eac5-ab9f-4541-b2a7-351f5f9335b5",
+    "id": "66c0e045-cee4-463c-ac6e-0babb750b46c",
     "modelName": "GMObject",
     "mvc": "1.0",
-    "name": "obj_shader_handler",
+    "name": "obj_light",
     "eventList": [
-        
+        {
+            "id": "fb7f59a1-26db-449a-b387-ae52617c3cab",
+            "modelName": "GMEvent",
+            "mvc": "1.0",
+            "IsDnD": false,
+            "collisionObjectId": "00000000-0000-0000-0000-000000000000",
+            "enumb": 0,
+            "eventtype": 0,
+            "m_owner": "66c0e045-cee4-463c-ac6e-0babb750b46c"
+        }
     ],
     "maskSpriteId": "00000000-0000-0000-0000-000000000000",
     "overriddenProperties": null,
     "parentObjectId": "00000000-0000-0000-0000-000000000000",
-    "persistent": true,
+    "persistent": false,
     "physicsAngularDamping": 0.1,
     "physicsDensity": 0.5,
     "physicsFriction": 0.2,
@@ -25,5 +34,5 @@
     "properties": null,
     "solid": false,
     "spriteId": "00000000-0000-0000-0000-000000000000",
-    "visible": true
+    "visible": false
 }

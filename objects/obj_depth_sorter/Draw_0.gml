@@ -1,5 +1,8 @@
 /// @description Draw Every Currently Visible World Object
 
+// Reset the variable for tracking total objects drawn
+totalObjectsDrawn = 0;
+
 // Update the Y-positions and zOffset in the grid and sort accordingly before drawing
 var _index = 0;
 with(par_world_object){
@@ -11,15 +14,18 @@ with(par_world_object){
 ds_grid_sort(global.worldObjects, 1, true);
 
 // Loop through each object in the list and draw them
-var _halfWidth, _halfHeight, _length;
+var _halfWidth, _halfHeight, _totalObjectsDrawn, _length;
 _halfWidth = global.cameraSize[X] / 2;
 _halfHeight = global.cameraSize[Y] / 2;
+_totalObjectsDrawn = 0;
 _length = ds_grid_height(global.worldObjects);
 for (var i = 0; i < _length; i++){
 	with(global.worldObjects[# 0, i]){
 		if (x < (global.controllerID.x - _halfWidth) - sprite_width || x > (global.controllerID.x + _halfWidth) + sprite_width || y < (global.controllerID.y - _halfHeight) - sprite_height || y > (global.controllerID.y + _halfHeight) + sprite_height){
-			return;	// The object isn't currently on screen; don't bother drawing them to the screen
+			continue;	// The object isn't currently on screen; don't bother drawing them to the screen
 		}
 		draw_self();
+		_totalObjectsDrawn++;
 	}
 }
+totalObjectsDrawn = _totalObjectsDrawn;

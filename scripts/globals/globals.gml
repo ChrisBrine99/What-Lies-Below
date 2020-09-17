@@ -2,7 +2,9 @@
 
 // Singleton variables that keep track of important instances; preventing them from being created multiple times
 // which would cause a myriad of issues, if the game even ran at all with multiple instances of these objects.
-global.controllerID = noone;
+global.controllerID = noone;		// For obj_controller
+global.sorterID = noone;			// For obj_depth_sorter
+global.effectID = noone;			// For obj_shader_handler
 
 // Holds the game's current state. This state determines the functionality of certain objects.
 global.gameState = GameState.InGame;
@@ -22,8 +24,8 @@ global.cameraSize = [0, 0];
 // frame.
 global.worldObjects = ds_grid_create(2, 0);
 
-// An array for the inventory that is two-dimensional, with a width of 28 (Maximum number of slots) and a height
-// of 3 (itemID, # of items, and equipped or not).
+// An array for the inventory that is two-dimensional, with a width of 28 (Maximum number of slots) and a 
+// height of three. (itemID, # of items, and equipped or not)
 for (var i = 0; i < INVENTORY_SIZE; i++){
 	global.invItem[i, 0] = 0;
 	global.invItem[i, 1] = 0;

@@ -15,11 +15,7 @@ visible = false;
 // to offset the collision for a more "3D" looking collision.
 zOffset = 0;
 
-#endregion
-
-#region ADD OBJECT TO RENDERING GRID
-
-// Adds one to make room for this object within the grid
+// Adds the object to the grid for rendering using the depth sorting system.
 ds_grid_resize(global.worldObjects, 2, instance_number(par_world_object));
 
 #endregion

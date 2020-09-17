@@ -3,6 +3,7 @@
 // Global object depth and entity depth
 #macro	GLOBAL_DEPTH				5
 #macro	ENTITY_DEPTH				300
+#macro	SHADOW_DEPTH				305
 
 // In-game tile width/height in pixels
 #macro	TILE_SIZE					16

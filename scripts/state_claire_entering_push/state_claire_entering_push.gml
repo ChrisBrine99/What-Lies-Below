@@ -3,6 +3,10 @@
 /// timer will count down to zero and exit to the default state. Othersize, the timer will count up and the
 /// player will enter the object pushing state.
 
+// Calculate input magnitude and direction
+inputMagnitude = (keyRight - keyLeft != 0) || (keyDown - keyUp != 0);
+inputDirection = point_direction(0, 0, (keyRight - keyLeft), (keyDown - keyUp));
+
 // If the object the player is pushing isn't stored in the ID variable (Ex. Exiting from pushing), the timer
 // will count down and return to the default state.
 if (inputMagnitude != 0 && inputDirection == pushedDirection && pushedObjectID != noone){

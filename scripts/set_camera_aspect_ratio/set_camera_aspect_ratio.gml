@@ -12,3 +12,8 @@ camera_set_proj_mat(cameraID, matrix_build_projection_ortho(_aspectRatio[X], _as
 surface_resize(application_surface, _aspectRatio[X], _aspectRatio[Y]);
 global.cameraSize = [_aspectRatio[X], _aspectRatio[Y]];
 set_window_size(_scale);
+
+// After updating the aspect ratio, update all the surfaces in the effect handler
+with(global.effectID){
+	clear_surfaces();
+}

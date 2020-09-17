@@ -17,7 +17,7 @@ global.controllerID = id;
 
 image_speed = 0;
 image_index = 0;
-//visible = false;
+visible = false;
 
 #endregion
 
@@ -47,5 +47,9 @@ newObjectSet = false;
 create_camera(SIXTEEN_BY_NINE, 4);
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+// For easily swapping aspect ratios on the fly
+curAspectRatio = 0;
+aspectRatio = [SIXTEEN_BY_NINE, TWENTYONE_BY_NINE, SIXTEEN_BY_TEN, FOUR_BY_THREE];
 
 #endregion

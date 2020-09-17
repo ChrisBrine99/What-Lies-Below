@@ -7,7 +7,7 @@
         
     ],
     "filterType": "GMScript",
-    "folderName": "music",
+    "folderName": "Music",
     "isDefaultView": false,
     "localisedFolderName": ""
 }
