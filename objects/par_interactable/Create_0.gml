@@ -4,6 +4,9 @@
 
 // Call default initialization from obj_world_object
 event_inherited();
+// Enable the drawOutline flag based on the player's interaction enable setting
+drawOutline = true;
+// TODO -- change to set this equal to the setting's value, whish is either true or false
 
 #endregion
 

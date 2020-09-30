@@ -1,5 +1,18 @@
 /// @description Variable Initialization
 
+#region SINGLETON CHECK
+
+if (global.playerID != noone){
+	if (global.playerID.object_index == object_index){
+		instance_destroy(self);
+		return;
+	}
+	instance_destroy(global.playerID);
+}
+global.playerID = id;
+
+#endregion
+
 #region EDITING INHERITED VARIABLES
 
 // Before any initialization, lock the camera onto Claire
@@ -10,14 +23,17 @@ event_inherited();
 curState = state_claire_default;
 
 // Set the maximum movement speeds
-maxHspdConst = 1;
-maxVspdConst = 1;
+maxHspdConst = 1.25;
+maxVspdConst = 1.25;
 maxHspd = maxHspdConst;
 maxVspd = maxVspdConst;
 
 // Set the initial maximum hitpoints
 maxHitpoints = 20;
 hitpoints = maxHitpoints;
+
+// Temporarily setting claire to be invincible for testing
+isInvincible = true;
 
 #endregion
 
@@ -38,8 +54,8 @@ keyFlashlight = false;
 // currently used ammunition, and the final one if for reloading the firearm.
 keyUseWeapon = false;
 keyReadyWeapon = false;
-keyChangeAmmo = false;
 keyReload = false;
+keyChangeAmmo = false;
 
 // Holds the cardinal direction for the player's current movement and the magnitude of movement for
 // the movement, which is them multiplied by maxHspd or maxVspd, respectively.
@@ -94,5 +110,16 @@ resistanceTimer = 0;
 sanityLevel = MAX_SANITY_LEVEL;
 sanityModifier = 0;
 sanityTimer = 0;
+
+// Variables relating to Claire's current internal temperature. When in rooms that are cold (Ex. normal world 
+// outside) or really hot (Ex. broken furnace room), her internal temperature will begin to slowly increse,
+// and she will being taking damage if she gets too hot or too cold.
+internalTemperature = 36.5;
+externalTemperature = ROOM_TEMPERATURE;
+temperatureTimer = 0;
+
+// FOR TESTING
+update_hitpoints(-15);
+update_hitpoint_regen_ratio(1, 1);
 
 #endregion

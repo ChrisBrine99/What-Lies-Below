@@ -3,5 +3,5 @@
 
 
 if (surface_exists(resultSurface)) {surface_free(resultSurface);}
-if (surface_exists(lightSurface)) {surface_free(lightSurface);}
-if (surface_exists(blurSurfaceBuffer)) {surface_free(blurSurfaceBuffer);}
+if (surface_exists(auxSurfaceA)) {surface_free(auxSurfaceA);}
+if (surface_exists(auxSurfaceB)) {surface_free(auxSurfaceB);}

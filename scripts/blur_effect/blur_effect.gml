@@ -8,11 +8,6 @@ var _blurSteps, _sigma;
 _blurSteps = argument0;
 _sigma = argument1;
 
-// Since surfaces are volatile, a fail-safe must be in place to prevent crashing.
-if (!surface_exists(blurSurfaceBuffer)){
-	blurSurfaceBuffer = surface_create(global.cameraSize[X], global.cameraSize[Y]);
-}
-
 // Begin drawing using the blur shader's 2-pass system
 shader_set(blurShader);
 // Set all the uniforms to their corresponding values
@@ -22,14 +17,14 @@ shader_set_uniform_f(sSigma, _sigma);
 
 // The first pass: horizontal blurring
 shader_set_uniform_f(sBlurVector, 1, 0); // [1, 0] tells the shader to blur horizontally
-surface_set_target(blurSurfaceBuffer);
+surface_set_target(auxSurfaceA);
 draw_surface(resultSurface, 0, 0);
 surface_reset_target();
 
 // The second pass: vertical blurring
 shader_set_uniform_f(sBlurVector, 0, 1); // [0, 1] tells the shader to blur vertically
 surface_set_target(resultSurface);
-draw_surface(blurSurfaceBuffer, 0, 0);
+draw_surface(auxSurfaceA, 0, 0);
 surface_reset_target();
 
 shader_reset();

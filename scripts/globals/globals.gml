@@ -1,10 +1,14 @@
 // @description Initializes all global variables with default values.
 
+// Variables to store the texture IDs for each of the fonts used in the game.
+global.texFontXSmall = font_get_texture(font_gui_xSmall);
+
 // Singleton variables that keep track of important instances; preventing them from being created multiple times
 // which would cause a myriad of issues, if the game even ran at all with multiple instances of these objects.
 global.controllerID = noone;		// For obj_controller
 global.sorterID = noone;			// For obj_depth_sorter
 global.effectID = noone;			// For obj_shader_handler
+global.playerID = noone;			// For obj_claire
 
 // Holds the game's current state. This state determines the functionality of certain objects.
 global.gameState = GameState.InGame;
@@ -26,8 +30,8 @@ global.worldObjects = ds_grid_create(2, 0);
 
 // An array for the inventory that is two-dimensional, with a width of 28 (Maximum number of slots) and a 
 // height of three. (itemID, # of items, and equipped or not)
-for (var i = 0; i < INVENTORY_SIZE; i++){
+/*for (var i = 0; i < INVENTORY_SIZE; i++){
 	global.invItem[i, 0] = 0;
 	global.invItem[i, 1] = 0;
 	global.invItem[i, 2] = false;
-}
+}*/

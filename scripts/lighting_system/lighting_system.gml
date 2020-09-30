@@ -12,14 +12,8 @@ _brightness = argument1;
 _contrast = argument2;
 _saturation = argument3;
 
-// Since surfaces are volatile, a fail-safe must be in place to prevent crashing.
-if (!surface_exists(lightSurface)){
-	lightSurface = surface_create(global.cameraSize[X], global.cameraSize[Y]);
-	lightTexture = surface_get_texture(lightSurface);
-}
-
 // Begin by drawing all the light sources onto a texture
-surface_set_target(lightSurface);
+surface_set_target(auxSurfaceA);
 
 // Completely black out the lighting surface before drawing the lights to it
 draw_clear(c_black);
@@ -27,11 +21,12 @@ gpu_set_blendmode(bm_add);
 gpu_set_tex_filter(true);
 
 // Store the top-left coordinate of the camera for easy reuse
-var _cameraX, _cameraY;
-_cameraX = global.controllerID.x - (global.cameraSize[X] / 2);
-_cameraY = global.controllerID.y - (global.cameraSize[Y] / 2);
+var _cameraSize, _cameraX, _cameraY;
+_cameraSize = [global.cameraSize[X], global.cameraSize[Y]];
+_cameraX = global.controllerID.x - (_cameraSize[X] / 2);
+_cameraY = global.controllerID.y - (_cameraSize[Y] / 2);
 with(obj_light){ // Display every visible light instance onto the light surface
-	if (x + radius[X] < _cameraX || y + radius[Y] < _cameraY || x - radius[X] > _cameraX + global.cameraSize[X] || y - radius[Y] > _cameraY + global.cameraSize[Y]){
+	if (x + radius[X] < _cameraX || y + radius[Y] < _cameraY || x - radius[X] > _cameraX + _cameraSize[X] || y - radius[Y] > _cameraY + _cameraSize[Y]){
 		continue; // The light is off of the screen; don't bother drawing the light
 	}
 	// Draw the light based on its radius, color, and strength
@@ -52,7 +47,7 @@ shader_set_uniform_f_array(sColor, _lightColor);
 shader_set_uniform_f(sBrightness, _brightness);
 shader_set_uniform_f(sContrast, _contrast);
 shader_set_uniform_f(sSaturation, _saturation);
-texture_set_stage(sLightTexture, lightTexture);
+texture_set_stage(sLightTexture, auxTextureA);
 
 surface_set_target(resultSurface);
 draw_surface(application_surface, 0, 0);

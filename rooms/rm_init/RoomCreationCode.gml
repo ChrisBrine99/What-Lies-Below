@@ -1,4 +1,8 @@
+// Initialize a new random seed on every start up to ensure randomness
 randomize();
+
+// Enable the GPU alpha test to discard transparent pixels in the render pipeline
+gpu_set_alphatestenable(true);
 
 // Initialize all global variables
 globals();

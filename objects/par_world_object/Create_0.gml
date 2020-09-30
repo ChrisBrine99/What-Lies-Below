@@ -15,6 +15,10 @@ visible = false;
 // to offset the collision for a more "3D" looking collision.
 zOffset = 0;
 
+// This flag enables/disables the outline shader's effect on an object. However, if the setting is enabled
+// outright; all outlined objects will be enabled as well. Likewise for when disabled.
+drawOutline = false;
+
 // Adds the object to the grid for rendering using the depth sorting system.
 ds_grid_resize(global.worldObjects, 2, instance_number(par_world_object));
 

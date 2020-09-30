@@ -19,12 +19,23 @@ keyFlashlight = keyboard_check_pressed(ord("F"));
 // Keyboard input for using weaponry
 keyUseWeapon = keyboard_check(ord("Z"));
 keyReadyWeapon = keyboard_check(ord("X"));
-keyChangeAmmo = keyboard_check_pressed(vk_lcontrol);
 keyReload = keyboard_check_pressed(ord("R"));
+keyChangeAmmo = keyboard_check_pressed(vk_lcontrol);
 
 // Call the par_entity step event
 event_inherited();
 // Any non-state code for the player will be below here ////////////////////////////
+
+// Updating the player's internal temperature level depending on the current room
+temperatureTimer += global.deltaTime;
+if (temperatureTimer > TEMPERATURE_TIMER){
+	temperatureTimer -= TEMPERATURE_TIMER;
+	internalTemperature += ((externalTemperature / (internalTemperature - 15)) - 1) * 0.05;
+	// If the player's temperature is too low or too high; make them take 10% damage every second
+	if (internalTemperature < MIN_TEMPERATURE || internalTemperature > MAX_TEMPERATURE){
+		update_hitpoints(-ceil(maxHitpoints * TEMPERATURE_DAMAGE));
+	}
+}
 
 // Updating current sanity level in 5 second intervals if the player can either gain or lose sanity
 if (sanityModifier != 0){
@@ -39,6 +50,7 @@ if (sanityModifier != 0){
 if (conditionTimer > 0){
 	conditionTimer -= global.deltaTime;
 	if (conditionTimer <= 0){ // Execute status condition effects
+		conditionTimer = 0;
 		if (isBleeding){ // Deals 2.5% damage relative to the player's maximum health value
 			update_hitpoints(-ceil(maxHitpoints * BLEED_DAMAGE));
 		}
@@ -50,7 +62,9 @@ if (conditionTimer > 0){
 			dealPoisonDamage = !dealPoisonDamage;
 		}
 		// Finally, restart the timer if the player still has status conditions
-		conditionTimer = (isBleeding || isPoisoned) ? CONDITION_TIMER : 0;
+		if (isBleeding || isPoisoned){
+			conditionTimer += CONDITION_TIMER;
+		}
 	}
 }
 

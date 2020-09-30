@@ -32,6 +32,6 @@ void main(){
 	outColor = mix(outColor, baseColor * normalize(lightColor + 0.05) * 3.0, gray);
 	outColor += 0.1 * lightColor;
 	
-	// Sent the calculated color off for rendering
+	// Send the calculated color off for rendering
     gl_FragColor = vec4(outColor, 1.0);
 }

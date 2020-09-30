@@ -36,6 +36,6 @@ void main(){
 		blurredColor += texture2D(gm_BaseTexture, sample) * sampleWeight;
 	}
 	
-	// Sent the calculated color off for rendering
+	// Send the calculated color off for rendering
     gl_FragColor = v_vColour * blurredColor / totalWeight;
 }

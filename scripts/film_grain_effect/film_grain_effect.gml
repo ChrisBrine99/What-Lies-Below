@@ -1,18 +1,23 @@
-/// @description Applies a psuedo grain effect on the screen using a single, static noise texture. This noise
-/// filter is draw in four quadrants, (top left, top right, bottom left, bottom right) and then it is offset
-/// by a random number of pixels. This results is an effect of dynamic noise while only using a single image.
+/// @description Code for the grain filter effect that is applied onto the GUI layer, which affects all GUI
+/// elements as well as the world. A 64x64 noise texture is used to determine the color of the pixel relative
+/// to this frame's calculated offset -- simulating film grain.
+/// @param spriteWidth
+/// @param strength
+/// @param size
 
-var _offsetX, _offsetY;
-_offsetX = irandom_range(-global.cameraSize[X], 0);
-_offsetY = irandom_range(-global.cameraSize[Y], 0);
+var _spriteWidth, _strength, _size;
+_spriteWidth = argument0;
+_strength = argument1;
+_size = argument2;
 
-// Draw the sprite using draw_sprite_part_ext in order to clips off parts of the texture that don't fit the
-// currently used application surface.
-draw_sprite_part_ext(spr_noise, 0, 0, 0, global.cameraSize[X], global.cameraSize[Y], 
-	_offsetX, _offsetY, 1, 1, c_white, 0.06);												// Top-Left
-draw_sprite_part_ext(spr_noise, 0, 0, 0, global.cameraSize[X], global.cameraSize[Y], 
-	_offsetX + global.cameraSize[X], _offsetY, 1, 1, c_white, 0.06);						// Top-Right
-draw_sprite_part_ext(spr_noise, 0, 0, 0, global.cameraSize[X], global.cameraSize[Y], 
-	_offsetX, _offsetY + global.cameraSize[Y], 1, 1, c_white, 0.06);						// Bottom-Left
-draw_sprite_part_ext(spr_noise, 0, 0, 0, global.cameraSize[X], global.cameraSize[Y], 
-	_offsetX + global.cameraSize[X], _offsetY + global.cameraSize[Y], 1, 1, c_white, 0.06); // Bottom-Right
+shader_set(filmGrainShader);
+// Set the uniforms to their corresponding values.
+shader_set_uniform_f(sGrainOffset, irandom_range(0, filmGrainWidth), irandom_range(0, filmGrainWidth));
+shader_set_uniform_f(sGrainStrength, _strength);
+shader_set_uniform_f(sGrainSize, _size);
+texture_set_stage(sGrainTexture, filmGrainTexture);
+
+// Draw the surface to the screen; applying the shader's effect to it
+draw_surface(resultSurface, 0, 0);
+
+shader_reset();

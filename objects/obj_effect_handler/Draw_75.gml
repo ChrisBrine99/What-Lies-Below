@@ -1,8 +1,11 @@
 /// @description Draw Screen-Space Effects
 
 // The screen-space post processing effects are ordered as follows:
-//		1	--		Film Grain/Noise Filter
-//		2	--		Scanline Filter
+//		1	--		Film Grain/Noise
+//		2	--		Scanlines
 
 // TODO -- Add check to see if noise filter is enabled
-film_grain_effect();
+film_grain_effect(filmGrainWidth, 0.09, 4);
+
+// TODO -- Add check to see if scanline effect is enabled
+scanline_effect(global.cameraSize[Y], 0.1);

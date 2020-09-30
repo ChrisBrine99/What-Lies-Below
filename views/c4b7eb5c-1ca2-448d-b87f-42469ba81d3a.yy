@@ -11,7 +11,8 @@
         "1806cbe6-96fe-482e-b1de-41d744af5996",
         "5dd1997a-4e50-4d50-97b8-ec591ee22bef",
         "28b84683-b7a5-4bd5-8906-7623854afb9d",
-        "99742657-5ddf-4d74-bf75-ca16307bbfd8"
+        "99742657-5ddf-4d74-bf75-ca16307bbfd8",
+        "ae904c92-482b-4672-b3be-b48c3848cad6"
     ],
     "filterType": "GMScript",
     "folderName": "obj_claire",

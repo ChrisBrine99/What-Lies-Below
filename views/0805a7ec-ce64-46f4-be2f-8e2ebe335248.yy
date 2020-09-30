@@ -4,11 +4,11 @@
     "mvc": "1.1",
     "name": "0805a7ec-ce64-46f4-be2f-8e2ebe335248",
     "children": [
-        "e63da52d-cd65-4d4a-840a-1e46867f5e1b",
-        "b83bdac7-55f2-4d92-a85b-9204e20659da"
+        "f0414693-feec-4be9-bd6a-9d65f0d99680",
+        "6541e520-50fc-4bf2-a523-3ccd67a4b930"
     ],
     "filterType": "GMSprite",
-    "folderName": "GUI",
+    "folderName": "Visuals",
     "isDefaultView": false,
     "localisedFolderName": ""
 }
