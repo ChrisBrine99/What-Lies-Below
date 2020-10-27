@@ -14,8 +14,8 @@ _calculatePositions = argument3;
 ds_list_add(controlsPos, 0, 0); // Every 2 indexes is one "element"
 ds_list_add(controlsAnchor, _anchor);
 
-// TODO -- Get keybinding image using another script here
-ds_list_add(controlsInfo, spr_floor_switch, 0, _info);
+var _imageData = keybinding_get_sprite(_keybinding);
+ds_list_add(controlsInfo, _imageData[0], _imageData[1], _info);
 
 // Finally, if needed, calculate the positions for the anchor's controls
 if (_calculatePositions){ // When initializing control info, the final index for each anchor should have this flag enabled.

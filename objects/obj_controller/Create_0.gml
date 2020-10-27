@@ -60,7 +60,7 @@ create_camera(SIXTEEN_BY_NINE, 4);
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-// For easily swapping aspect ratios on the fly
+// FOR TESTING
 curAspectRatio = 0;
 aspectRatio = [SIXTEEN_BY_NINE, TWENTYONE_BY_NINE, SIXTEEN_BY_TEN, FOUR_BY_THREE];
 

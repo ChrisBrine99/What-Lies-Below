@@ -5,6 +5,11 @@
 
 var _sOutlineColor = argument0;
 
+// If the currently highlighted option isn't active, don't draw its information
+if (!optionActive[| curOption]){
+	return;
+}
+
 // Set the currently used alignment and font
 draw_set_halign(infoAlign[X]);
 draw_set_valign(infoAlign[Y]);

@@ -18,6 +18,7 @@ shader_set(outlineShader);
 // Set the outline color here since it won't change for specific objects
 shader_set_uniform_f_array(sOutlineColor, [1, 1, 1]);
 
+
 // Store the uniform locations within local variables for quick access
 var _sPixelWidth, _sPixelHeight, _drawOutline, _spriteTexture;
 _sPixelWidth = sPixelWidth;

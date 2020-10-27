@@ -1,7 +1,7 @@
 /// @description Updating Keyboard Input
 
 // If there is no state to execute or the game state is set to paused; don't allow entity functionality
-if (curState == -1 || global.gameState == GameState.Paused){
+if (curState == -1 || global.gameState != GameState.InGame){
 	image_speed = 0;
 	return;
 }

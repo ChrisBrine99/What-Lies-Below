@@ -15,7 +15,8 @@ shader_set(outlineShader);
 shader_set_uniform_i(sDrawOutline, 1); // Make sure outline is enabled for text
 
 draw_set_color(c_white);
-outline_set_font(font_gui_xSmall, [0.5, 0.5, 0.5], global.texFontXSmall, sOutlineColor, sPixelWidth, sPixelHeight);
+shader_set_uniform_f_array(sOutlineColor, [0.5, 0.5, 0.5]);
+outline_set_font(font_gui_xSmall, global.texFontXSmall, sPixelWidth, sPixelHeight);
 
 draw_text(5, 5, "Delta Time: " + string(global.deltaTime));
 
@@ -34,12 +35,35 @@ with(global.playerID){
 }
 
 // FOR TESTING
-with(par_menu){
-	draw_menu_controls(_sOutlineColor);
-	
-	draw_set_halign(fa_left);
+if (global.gameState == GameState.InMenu){
+	var _sDrawOutline = sDrawOutline;
+	with(par_menu){
+		// NOTE -- In any real menu's draw code, the shader has to be temporarily reset
+		// in order to use draw_sprite_ext. For some reason, it doesn't work whenever the
+		// outline shader isn't currently active.
+		draw_menu_options(_sOutlineColor, _sDrawOutline);
+		draw_menu_controls(_sOutlineColor);
+		draw_set_halign(fa_left);
+	}	
 }
 
+/// TODO -- Eventually this draw code should be written in such a way that allows any object/menu to be
+/// pointed to its draw function instead of everything being coded here.
+
 shader_reset();
+
+
+/*var _a, _b;
+_a = 0;
+_b = 0;
+repeat(7){
+	repeat(4){
+		draw_sprite_ext(spr_rectangle, 0, 120 + (_b * 19), 20 + (_a * 19), 18, 18, 0, c_black, 1);
+		draw_sprite_ext(spr_rectangle, 0, 121 + (_b * 19), 21 + (_a * 19), 16, 16, 0, c_white, 1);
+		_b++;
+	}
+	_b = 0;
+	_a++;
+}*/
 
 #endregion

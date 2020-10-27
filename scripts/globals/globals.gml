@@ -1,4 +1,4 @@
-// @description Initializes all global variables with default values.
+/// @description Initializes all global variables with default values.
 
 // Variables to store the texture IDs for each of the fonts used in the game.
 global.texFontXSmall = font_get_texture(font_gui_xSmall);

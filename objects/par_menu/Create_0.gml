@@ -21,18 +21,20 @@ transitionArgs = -1;	// An array of indefinite length
 // be executed, and for only that state's code. The lastState variable stores the previously active state.
 curState = -1;
 lastState = -1;
+// Menus can use the entity's set_cur_state to change state, much like an entity object
 
 // These variables keep track of the option that has been highlighted by the user, the option that was
 // selected by the user (if one has been selected), and the option that was selected by the user, but
 // another option has to be selected in order to use that auxillary option. Finally, the size of the 
-// menu is stored using the size of the option ds_list, and the direction determines if the menu is
-// horizontal or vertical, which determines the keyboard input used for moving through the menu.
+// menu is stored using the size of the option ds_list, the width is how many options exist on a single
+// row, and the rows stores the total number of rows in the menu.
 curOption = 0;
+prevOption = 0;
 selOption = -1;
 auxSelOption = -1;
 menuSize = 0;
-menuDirection = 0;		// A 2D vector [X, Y] 
-// [1, 0] = horizontal menu, and [0, 1] = vertical menu
+menuWidth = 0;
+menuRows = 0;
 
 // These variables are for automatically scrolling through the menu's options. The first is the time
 // (60 == 1 second) the menu movement key has been held for, the time it needs to be held in order to 
@@ -40,9 +42,20 @@ menuDirection = 0;		// A 2D vector [X, Y]
 // move once autoscrolling has been activated, and finally, the flag to toggle automatic cursor scrolling 
 // on and off.
 holdTimer = 0;
-timeToHold = 0;
-autoScrollSpeed = 0;
+timeToHold = 30;
+autoScrollSpeed = 0.4;
 isAutoScrolling = false;
+
+// Keyboard input state flags that track when a button is held/released/pressed. There are two flags for
+// returning to a previous menu/exiting a menu
+keyRight = false;
+keyLeft = false;
+keyUp = false;
+keyDown = false;
+keySelect = false;
+keyReturn = false;
+keyAuxReturn = false;
+auxReturnIndex = -1;
 
 // VARIABLES FOR MENU TITLE ////////////////////////////////////////////////////////
 
@@ -63,10 +76,11 @@ titleOutlineCol = [0.5, 0.5, 0.5];
 
 // The ds_list that stores all the string values for the available menu options.
 option = ds_list_create();			// A ds_list of indefinite length (string)
+optionActive = ds_list_create();	// A ds_list of indefinite length (boolean)
 // The position of the top element for the displayed options, the offsets for each option, and the spacing
 // between each of the options on each axis.
 optionPos = 0;						// A 2D vector [X, Y]
-optionPosOffset = 0;				// A ds_list of indefinite length (x, y)
+optionPosOffset = ds_list_create();	// A ds_list of indefinite length (x, y)
 optionSpacing = 0;					// A 2D vector [X, Y]
 // The alignment of the options relative to their posiiton value, as well as the font used for the options.
 optionAlign = 0;					// A 2D vector [X, Y]
@@ -76,6 +90,10 @@ optionFont = font_gui_xSmall;
 // currently visible.
 optionCol = c_white;
 optionOutlineCol = [0.5, 0.5, 0.5];
+// The colors used for a menu action that is disbled. A disabled option means that the player cannot currently
+// interact with it and it won't be highlighted by the menu cursor.
+optionInactiveCol = c_gray;
+optionInactiveOutlineCol = [0.25, 0.25, 0.25];
 // The first two variables are the colors used for the option that was selected by the user. Meanwhile, the
 // second pair of variables are used for an option that was selected by the user, but it now stored in an
 // auxillary buffer for use once another option is selected by the user. (Ex. Combining Items, Swapping Items)
@@ -88,12 +106,12 @@ optionAuxSelectOutlineCol = [0.5, 0, 0];
 optionHighlightCol = make_color_rgb(252, 224, 168);
 optionHighlightOutlineCol = [0.49, 0.44, 0.33];
 
-// Determines the first visible option that will be drawn, which is located wherever the zeroth element would
-// drawn relative to the position of the options. The next variable determines how many options are visible
-// at any given time. Finally, the offset is how many options from the last or first visible one the cursor
-// needs to be before the visible options will be shifted.
-firstToDraw = 0;
-numToDraw = 0;
+// Determines the first visible row of option that will be drawn, which is located wherever the zeroth 
+// element  would be drawn relative to the position of the options. The next variable determines how many 
+// rows of  options are visible at any given time. Finally, the offset is how many rows from the last or 
+// first visible one the cursor needs to be before the visible options will be shifted.
+firstRowToDraw = 0;
+numRowsToDraw = 0;
 scrollOffset = 0;
 
 // The first variable is a flag that will determine whether or not a highlighted option cursor will be 
@@ -107,14 +125,10 @@ cursorPos = 0;			// A 2D vector [X, Y]
 // relative to the first, last menu options, and number of visible options. The first variable is a flag to
 // toggle the drawing of the scrollbar. The second is a vector storing the position and size of the scrollbar 
 // on the screen. The third and fourth are the inner scrollbar and outer scrollbar colors, respectively. 
-// Finally, the last variable is a 2D vector equalling either [1, 0] or [0, 1], which determines the direction 
-// of the scrollbar on the screen.
 displayScrollbar = false;
 scrollbar = 0;			// A 4D vector [X, Y, W, H]
 scrollbarInnerCol = c_white;
 scrollbarOuterCol = [0.5, 0.5, 0.5];
-scrollbarDirection = 0;	// A 2D vector [X, Y]
-// [1, 0] = horizontal scrollbar, [0, 1] = vertical scrollbar
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -163,14 +177,34 @@ controlsOutlineCol = [0.5, 0.5, 0.5];
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-// FOR TESTING
-leftAnchor = [5, 168];
-rightAnchor = [315, 168];
 
-controls_add_info(vk_space, LEFT_ANCHOR, "Test", false);
-controls_add_info(vk_space, LEFT_ANCHOR, "TestTwo", true);
 
-controls_add_info(vk_space, RIGHT_ANCHOR, "Test", false);
-controls_add_info(vk_space, RIGHT_ANCHOR, "TestTwo", true);
+
+// FOR TESTING OPTIONS/MENU MOVEMENT //////////////////////////////////////////////
+
+// Initialize the most important menu variables
+menu_initialize(-1, -1, 4, 10, 3, 15, 0.3);
+
+// Initialize the menu options
+menu_init_options(130, 15, fa_left, fa_top, 50, 10, font_gui_xSmall);
+for (var i = 0; i < 70; i++){
+	options_add_info("TEST " + string(i), "TEST INFORMATION " + string(i), true);
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+// FOR TESTING CONTROL DISPLAYING ////////////////////////////////////////////////
+
+menu_init_control_info(5, global.cameraSize[Y] - 12, global.cameraSize[X] - 5, global.cameraSize[Y] - 12, font_gui_xSmall, c_white, [0.5, 0.5, 0.5]);
+
+controls_add_info(ord("Z"), LEFT_ANCHOR, "Select", false);
+controls_add_info(ord("X"), LEFT_ANCHOR, "Return", true);
+
+controls_add_info(vk_right, RIGHT_ANCHOR, "", false);
+controls_add_info(vk_left, RIGHT_ANCHOR, "", false);
+controls_add_info(vk_up, RIGHT_ANCHOR, "", false);
+controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", true);
+
+////////////////////////////////////////////////////////////////////////////////////
 
 #endregion

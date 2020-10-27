@@ -40,6 +40,6 @@ entity_world_collision(false);
 
 // Animate pushing the object by using the default animation system
 direction = pushedDirection;
-sprite_index = walkSprite;
+sprite_index = pushSprite;
 image_speed = point_distance(0, 0, _velocity[X], _velocity[Y]) * sprite_get_speed(sprite_index);
 entity_default_animate();
