@@ -11,7 +11,7 @@ _sDrawOutline = argument1;
 // Set the currently used alignment and font
 draw_set_halign(optionAlign[X]);
 draw_set_valign(optionAlign[Y]);
-draw_set_font(optionFont);
+outline_set_font(optionFont, global.fontTextures[? optionFont], sPixelWidth, sPixelHeight);
 
 var _index, _curOption, _index2D;
 _index = 0;

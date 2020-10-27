@@ -46,8 +46,8 @@ timeToHold = 30;
 autoScrollSpeed = 0.4;
 isAutoScrolling = false;
 
-// Keyboard input state flags that track when a button is held/released/pressed. There are two flags for
-// returning to a previous menu/exiting a menu
+// Keyboard input state flags that track when a button is held/released/pressed. True means it's pressed or
+// held down by the user, and false means the key has been released.
 keyRight = false;
 keyLeft = false;
 keyUp = false;
@@ -55,7 +55,25 @@ keyDown = false;
 keySelect = false;
 keyReturn = false;
 keyAuxReturn = false;
+
+// The index values for some of the configurable keybindings. These include the cursor's directional keys,
+// which allow the user to move through the menu, and the auxillary return key, which can be used to allow
+// for a secondary key that acts as a return key.
+rightIndex = vk_right;
+leftIndex = vk_left;
+upIndex = vk_up;
+downIndex = vk_down;
 auxReturnIndex = -1;
+
+// Holds the index for the shader used for outlining text. Note that these are just for easy reference
+// and the shader should actually be set in an object that handles drawing all the menu's in a single
+// shader pass.
+outlineShader = shd_outline;
+// Getting the uniforms for the shader; storing them in local variables
+sPixelWidth = shader_get_uniform(outlineShader, "pixelWidth");
+sPixelHeight = shader_get_uniform(outlineShader, "pixelHeight");
+sOutlineColor = shader_get_uniform(outlineShader, "outlineColor");
+sDrawOutline = shader_get_uniform(outlineShader, "drawOutline");
 
 // VARIABLES FOR MENU TITLE ////////////////////////////////////////////////////////
 
@@ -64,7 +82,7 @@ auxReturnIndex = -1;
 title = "";
 titlePos = 0;			// A 2D vector [X, Y]
 titleAlign = 0;			// A 2D vector [X, Y]
-titleFont = font_gui_xSmall;
+titleFont = -1;
 
 // The color of the title's text and respective outline.
 titleTextCol = c_white;
@@ -84,7 +102,7 @@ optionPosOffset = ds_list_create();	// A ds_list of indefinite length (x, y)
 optionSpacing = 0;					// A 2D vector [X, Y]
 // The alignment of the options relative to their posiiton value, as well as the font used for the options.
 optionAlign = 0;					// A 2D vector [X, Y]
-optionFont = font_gui_xSmall;
+optionFont = -1;
 
 // The colors used for options that aren't selected or being highlighted by the user current, but they are
 // currently visible.
@@ -140,7 +158,7 @@ scrollbarOuterCol = [0.5, 0.5, 0.5];
 info = ds_list_create();			// A ds_list of indefinite length (string)
 infoPos = 0;						// A 2D vector [X, Y]
 infoAlign = 0;						// A 2D vector [X, Y]
-infoFont = font_gui_xSmall;
+infoFont = -1;
 
 // The color of both the inside of the iunformation text and its accompanying outline.
 infoTextCol = c_white;
@@ -169,7 +187,7 @@ rightAnchor = 0;					// A 2D vector [X, Y]
 controlsPos = ds_list_create();		// A ds_list of indefinite length (X, Y)
 controlsAnchor = ds_list_create();	// A ds_list of indefinite length (element(s) must be either -1 or 1)	
 controlsInfo = ds_list_create();	// A ds_list of indefinite length (sprite_index, image_index, string) 
-controlsFont = font_gui_xSmall;
+controlsFont = -1;
 
 // The color of both the inside of the iunformation text and its accompanying outline.
 controlsTextCol = c_white;
@@ -183,10 +201,10 @@ controlsOutlineCol = [0.5, 0.5, 0.5];
 // FOR TESTING OPTIONS/MENU MOVEMENT //////////////////////////////////////////////
 
 // Initialize the most important menu variables
-menu_initialize(-1, -1, 4, 10, 3, 15, 0.3);
+/*menu_initialize(-1, -1, 4, 10, 3, 15, 0.3);
 
 // Initialize the menu options
-menu_init_options(130, 15, fa_left, fa_top, 50, 10, font_gui_xSmall);
+menu_init_options(130, 15, fa_left, fa_top, 50, 10, font_gui_medium);
 for (var i = 0; i < 70; i++){
 	options_add_info("TEST " + string(i), "TEST INFORMATION " + string(i), true);
 }
@@ -195,7 +213,7 @@ for (var i = 0; i < 70; i++){
 
 // FOR TESTING CONTROL DISPLAYING ////////////////////////////////////////////////
 
-menu_init_control_info(5, global.cameraSize[Y] - 12, global.cameraSize[X] - 5, global.cameraSize[Y] - 12, font_gui_xSmall, c_white, [0.5, 0.5, 0.5]);
+menu_init_control_info(5, global.cameraSize[Y] - 12, global.cameraSize[X] - 5, global.cameraSize[Y] - 12, font_gui_small, c_white, [0.5, 0.5, 0.5]);
 
 controls_add_info(ord("Z"), LEFT_ANCHOR, "Select", false);
 controls_add_info(ord("X"), LEFT_ANCHOR, "Return", true);
@@ -203,7 +221,7 @@ controls_add_info(ord("X"), LEFT_ANCHOR, "Return", true);
 controls_add_info(vk_right, RIGHT_ANCHOR, "", false);
 controls_add_info(vk_left, RIGHT_ANCHOR, "", false);
 controls_add_info(vk_up, RIGHT_ANCHOR, "", false);
-controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", true);
+controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", true);*/
 
 ////////////////////////////////////////////////////////////////////////////////////
 

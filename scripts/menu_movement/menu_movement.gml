@@ -2,10 +2,10 @@
 /// moving between them, and backing out of selecting an item, or exiting the menu.
 
 // Update current input states for the keyboard variables
-keyRight = keyboard_check(vk_right);
-keyLeft = keyboard_check(vk_left);
-keyUp = keyboard_check(vk_up);
-keyDown = keyboard_check(vk_down);
+keyRight = keyboard_check(rightIndex);
+keyLeft = keyboard_check(leftIndex);
+keyUp = keyboard_check(upIndex);
+keyDown = keyboard_check(downIndex);
 keySelect = keyboard_check_pressed(ord("Z"));
 keyReturn = keyboard_check_pressed(ord("X"));
 keyAuxReturn = keyboard_check_pressed(auxReturnIndex);
@@ -69,7 +69,7 @@ if (keyRight || keyLeft || keyUp || keyDown){
 		if (menuWidth > 1){
 			if ((keyLeft && !keyRight) || (!keyLeft && keyRight)){
 				// Check if the cursor needs to wrap around to the other side
-				if ((keyRight && ((curOption % menuWidth) == menuWidth - 1) || curOption == menuSize - 1)){ // Wrap around to the right
+				if ((keyRight && ((curOption % menuWidth) == menuWidth - 1) || curOption == menuSize)){ // Wrap around to the right
 					curOption -= curOption % menuWidth;
 				} else if (keyLeft && (curOption % menuWidth) == 0){ // Wrap around to the left
 					curOption = min(curOption + (menuWidth - 1), menuSize - 1);

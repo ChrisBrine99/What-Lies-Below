@@ -191,6 +191,14 @@
             }
         },
         {
+            "Key": "114f6450-bf8f-4a9d-9c02-e5367e8ff6aa",
+            "Value": {
+                "id": "31e5d75d-6302-4366-867e-b6357225beed",
+                "resourcePath": "fonts\\font_gui_large\\font_gui_large.yy",
+                "resourceType": "GMFont"
+            }
+        },
+        {
             "Key": "11745575-6e3d-459f-9b79-7cfb256bfa47",
             "Value": {
                 "id": "5044923c-4e20-40ae-98f4-a079a10d65a6",
@@ -287,6 +295,14 @@
             }
         },
         {
+            "Key": "1dbe48ae-6abf-4304-8554-8ec9884869ef",
+            "Value": {
+                "id": "9e5e9440-fb2e-424f-9ae3-08a0d5930eae",
+                "resourcePath": "objects\\obj_item_menu\\obj_item_menu.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "1dc81b7b-d070-449a-b87a-08cbdce01709",
             "Value": {
                 "id": "857d7e93-109c-4cd4-a856-b6e12bcfd19f",
@@ -332,6 +348,14 @@
                 "id": "204ee48a-1265-4d37-81af-143963500633",
                 "resourcePath": "scripts\\draw_menu_cursor\\draw_menu_cursor.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "26a4f081-d9b0-443a-bbd9-c3838149ed71",
+            "Value": {
+                "id": "8e3f62a9-8fa6-436d-afe5-459ace3c9463",
+                "resourcePath": "objects\\obj_note_menu\\obj_note_menu.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -499,6 +523,14 @@
             "Value": {
                 "id": "bcb4d491-0eb5-47c3-9163-ded01e99a378",
                 "resourcePath": "views\\3e7c184a-b4c0-434b-abfb-9df422df0ad5.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "3ecd13d5-b465-4435-989b-695746b4ec0f",
+            "Value": {
+                "id": "8d1030e7-ea82-4c34-bac7-6b88ad14a477",
+                "resourcePath": "views\\3ecd13d5-b465-4435-989b-695746b4ec0f.yy",
                 "resourceType": "GMFolder"
             }
         },
@@ -815,6 +847,14 @@
             }
         },
         {
+            "Key": "7fe4cb1f-f52f-47c9-8082-a7aca94e0048",
+            "Value": {
+                "id": "5f6c8244-1239-400d-ab67-1daa9c38ff0a",
+                "resourcePath": "objects\\obj_map_menu\\obj_map_menu.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "806d9232-3eaa-49ec-bd8a-633c7bad0e9d",
             "Value": {
                 "id": "74e11b7b-6935-42cf-a337-041244e8c501",
@@ -906,7 +946,7 @@
             "Key": "960f4ac5-3715-4fe7-bf12-0f20b15c7088",
             "Value": {
                 "id": "0b26d2e2-963e-4b27-8852-e3edcfdaa18e",
-                "resourcePath": "fonts\\font_gui_xSmall\\font_gui_xSmall.yy",
+                "resourcePath": "fonts\\font_gui_small\\font_gui_small.yy",
                 "resourceType": "GMFont"
             }
         },
@@ -975,6 +1015,14 @@
             }
         },
         {
+            "Key": "a43c8ce6-aa5f-464d-8b78-50c6a645c885",
+            "Value": {
+                "id": "21ec6794-d6b0-448b-a9e0-be4c223d456e",
+                "resourcePath": "objects\\obj_inventory_menu\\obj_inventory_menu.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "a4c190bd-d346-4b66-9451-f8386e613dd3",
             "Value": {
                 "id": "b272da1a-67ff-4c23-b452-7b08adf69b1e",
@@ -1036,6 +1084,14 @@
                 "id": "5fca4023-ac98-467e-bf22-e2b9962d57e1",
                 "resourcePath": "scripts\\set_external_temperature\\set_external_temperature.yy",
                 "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "aeb9bcca-a2ae-4b54-a7c4-3a9bb0c12bbb",
+            "Value": {
+                "id": "49307241-5d5b-46d7-8597-73a3f7728b88",
+                "resourcePath": "fonts\\font_gui_medium\\font_gui_medium.yy",
+                "resourceType": "GMFont"
             }
         },
         {

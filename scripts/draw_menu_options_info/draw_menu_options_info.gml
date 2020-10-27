@@ -13,7 +13,7 @@ if (!optionActive[| curOption]){
 // Set the currently used alignment and font
 draw_set_halign(infoAlign[X]);
 draw_set_valign(infoAlign[Y]);
-draw_set_font(infoFont);
+outline_set_font(infoFont, global.fontTextures[? infoFont], sPixelWidth, sPixelHeight);
 
 // Set the color of the font's text and its outline
 draw_set_color(infoTextCol);

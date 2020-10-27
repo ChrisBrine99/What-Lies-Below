@@ -11,6 +11,11 @@ _textureID = argument1;
 _sPixelWidth = argument2;
 _sPixelHeight = argument3;
 
+// If the font hasn't changed, don't bother resetting texel sizes since they didn't change.
+if (draw_get_font() == _font){
+	return;
+}
+
 draw_set_font(_font);
 shader_set_uniform_f(_sPixelWidth, texture_get_texel_width(_textureID));
 shader_set_uniform_f(_sPixelHeight, texture_get_texel_height(_textureID));

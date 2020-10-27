@@ -1,7 +1,11 @@
 /// @description Handling Transition/State Code
 
-#region HANDLING TRANSITION STATE
+// If the game state isn't currently set to InMenu, delete the menu(s)
+if (global.gameState == GameState.InGame){
+	instance_destroy(self, false); // Destroy event will not be performed for this case
+}
 
+// Handling the existing state if one is currently being executed
 if (transition != -1){
 	// Don't perform transition if transitionArgs is no longer an array
 	if (!is_array(transitionArgs)){
@@ -13,18 +17,10 @@ if (transition != -1){
 	return;
 }
 
-#endregion
-
-#region CURRENT STATE EXECUTION
-
 // FOR TESTING
 menu_movement();
-if (global.gameState == GameState.InGame){
-	instance_destroy(self, false);
-}
 
+// Execute the menu's given state's code if is set to a script index
 if (curState != -1){
 	script_execute(curState);
 }
-
-#endregion

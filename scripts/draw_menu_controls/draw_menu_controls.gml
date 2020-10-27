@@ -6,7 +6,7 @@ var _sOutlineColor = argument0;
 
 // Set the currently used font; also set the vertical alignment back to its default
 draw_set_valign(fa_top);
-draw_set_font(controlsFont);
+outline_set_font(controlsFont, global.fontTextures[? controlsFont], sPixelWidth, sPixelHeight);
 
 // Set the color of the font's text and its outline
 draw_set_color(controlsTextCol);

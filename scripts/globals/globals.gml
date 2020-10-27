@@ -1,7 +1,12 @@
 /// @description Initializes all global variables with default values.
 
-// Variables to store the texture IDs for each of the fonts used in the game.
-global.texFontXSmall = font_get_texture(font_gui_xSmall);
+// A map that stores all the texture data for the game's available fonts. The key is the number given
+// to the font given by GML itself, which is a constant given by referencing the font resource itself.
+global.fontTextures = ds_map_create();
+// Since these key/vaue pairs aren't ever changed or updates, they should all be set below.
+ds_map_add(global.fontTextures, font_gui_small,		font_get_texture(font_gui_small));
+ds_map_add(global.fontTextures, font_gui_medium,	font_get_texture(font_gui_medium));
+ds_map_add(global.fontTextures, font_gui_large,		font_get_texture(font_gui_large));
 
 // Singleton variables that keep track of important instances; preventing them from being created multiple times
 // which would cause a myriad of issues, if the game even ran at all with multiple instances of these objects.
@@ -30,8 +35,9 @@ global.worldObjects = ds_grid_create(2, 0);
 
 // An array for the inventory that is two-dimensional, with a width of 28 (Maximum number of slots) and a 
 // height of three. (itemID, # of items, and equipped or not)
-/*for (var i = 0; i < INVENTORY_SIZE; i++){
+global.curInvSize = 8; // Starting amount is 8; maximum is 24; upgrades grant an extra 2 slots
+for (var i = 0; i < INVENTORY_SIZE; i++){
 	global.invItem[i, 0] = 0;
 	global.invItem[i, 1] = 0;
 	global.invItem[i, 2] = false;
-}*/
+}
