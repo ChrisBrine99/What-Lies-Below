@@ -5,7 +5,7 @@
 // Inherit all variables from the parent menu class
 event_inherited();
 // First, initialize the menu itself
-menu_initialize(-1, -1, 3, 1, 0, 25, 0.3); // TODO -- Place transition and its arguments where the -1s are located
+menu_initialize(-1, -1, 3, 1, 0, 30, 0.4); // TODO -- Place transition and its arguments where the -1s are located
 // Next, initialize the menu option variables
 var _optionOffset = floor(global.cameraSize[X] / 3); // Centers the position of each option and provides even spacing
 menu_init_options((global.cameraSize[X] / 2) - _optionOffset, 20, fa_center, fa_top, _optionOffset, 0, font_gui_medium);
@@ -27,9 +27,14 @@ controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", false);
 controls_add_info(ord("V"), RIGHT_ANCHOR, "", false); 
 controls_add_info(ord("C"), RIGHT_ANCHOR, "Switch Section", true); 
 
+menu_init_cursor(0, 0, spr_wall_movable);
+
 // Alter the keybindings used for moving the menu's cursor to be exclusive to swapping inventory sections
 rightIndex = ord("V");
 leftIndex = ord("C");
+
+// Set the initial state of the menu
+set_cur_state(state_inventory_default);
 
 #endregion
 

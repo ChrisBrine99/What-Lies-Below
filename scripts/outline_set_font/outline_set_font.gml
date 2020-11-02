@@ -11,7 +11,7 @@ _textureID = argument1;
 _sPixelWidth = argument2;
 _sPixelHeight = argument3;
 
-// If the font hasn't changed, don't bother resetting texel sizes since they didn't change.
+// If the font hasn't changed, don't bother resetting texel sizes since they didn't change either.
 if (draw_get_font() == _font){
 	return;
 }

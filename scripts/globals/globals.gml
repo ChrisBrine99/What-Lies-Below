@@ -6,7 +6,7 @@ global.fontTextures = ds_map_create();
 // Since these key/vaue pairs aren't ever changed or updates, they should all be set below.
 ds_map_add(global.fontTextures, font_gui_small,		font_get_texture(font_gui_small));
 ds_map_add(global.fontTextures, font_gui_medium,	font_get_texture(font_gui_medium));
-ds_map_add(global.fontTextures, font_gui_large,		font_get_texture(font_gui_large));
+ds_map_add(global.fontTextures, font_gui_large,		font_get_texture(font_gui_large)); 
 
 // Singleton variables that keep track of important instances; preventing them from being created multiple times
 // which would cause a myriad of issues, if the game even ran at all with multiple instances of these objects.

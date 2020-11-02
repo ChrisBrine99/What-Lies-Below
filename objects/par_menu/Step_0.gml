@@ -17,9 +17,6 @@ if (transition != -1){
 	return;
 }
 
-// FOR TESTING
-menu_movement();
-
 // Execute the menu's given state's code if is set to a script index
 if (curState != -1){
 	script_execute(curState);

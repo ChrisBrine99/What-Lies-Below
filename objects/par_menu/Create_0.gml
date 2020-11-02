@@ -132,21 +132,20 @@ firstRowToDraw = 0;
 numRowsToDraw = 0;
 scrollOffset = 0;
 
-// The first variable is a flag that will determine whether or not a highlighted option cursor will be 
-// visible next to the respective option. The next variable is the sprite that is used as the highlighted 
-// option cursor. Finally, the last variable is a 2D vector to store the zeroth position of the cursor.
-displayCursor = false;
+// Variables relating to an optional menu cursor. The first variable is the sprite that is used as the 
+// highlighted option cursor. Finally, the last variable is a 2D vector to store the zeroth position of 
+// the cursor.
 cursorSprite = -1;
-cursorPos = 0;			// A 2D vector [X, Y]
+cursorPos = 0;						// A 2D vector [X, Y]
 
 // Variables relating to an optional scrollbar that the menu can use to display the user's cursor's position
-// relative to the first, last menu options, and number of visible options. The first variable is a flag to
-// toggle the drawing of the scrollbar. The second is a vector storing the position and size of the scrollbar 
-// on the screen. The third and fourth are the inner scrollbar and outer scrollbar colors, respectively. 
-displayScrollbar = false;
-scrollbar = 0;			// A 4D vector [X, Y, W, H]
+// relative to the first, last menu options, and number of visible options. The first is a vector storing 
+// the position and size of the scrollbar on the screen. The second and third are the inner scrollbar and 
+// outer scrollbar colors, respectively. 
+scrollbar = 0;						// A 4D vector [X, Y, W, H]
 scrollbarInnerCol = c_white;
-scrollbarOuterCol = [0.5, 0.5, 0.5];
+scrollbarOuterCol = c_gray;
+scrollbarBackCol = c_black;
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -195,19 +194,21 @@ controlsOutlineCol = [0.5, 0.5, 0.5];
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-
-
+#endregion
 
 // FOR TESTING OPTIONS/MENU MOVEMENT //////////////////////////////////////////////
 
 // Initialize the most important menu variables
-/*menu_initialize(-1, -1, 4, 10, 3, 15, 0.3);
+/*menu_initialize(-1, -1, 6, 10, 3, 15, 0.3);
 
 // Initialize the menu options
-menu_init_options(130, 15, fa_left, fa_top, 50, 10, font_gui_medium);
-for (var i = 0; i < 70; i++){
+menu_init_options(20, 15, fa_left, fa_top, 50, 10, font_gui_medium);
+for (var i = 0; i < 75; i++){
 	options_add_info("TEST " + string(i), "TEST INFORMATION " + string(i), true);
 }
+
+// Initialize the menu's scrollbar
+menu_init_scrollbar(12, 15, 3, 103, c_white, c_gray, c_black);
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -224,5 +225,3 @@ controls_add_info(vk_up, RIGHT_ANCHOR, "", false);
 controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", true);*/
 
 ////////////////////////////////////////////////////////////////////////////////////
-
-#endregion

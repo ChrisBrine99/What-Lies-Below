@@ -11,7 +11,7 @@ draw_set_alpha(image_alpha);
 
 #region DRAWING TEXT WITH OUTLINE SHADER
 
-shader_set(outlineShader);
+/*shader_set(outlineShader);
 shader_set_uniform_i(sDrawOutline, 1); // Make sure outline is enabled for text
 
 draw_set_color(c_white);
@@ -32,7 +32,7 @@ with(global.playerID){
 					  string(hpRegenAmount / max(1, regenSpeed)) + " hp/sec\n\n" +
 					  string(internalTemperature) + " C\n" +
 					  string(externalTemperature) + " C");
-}
+}*/
 
 // FOR TESTING
 if (global.gameState == GameState.InMenu){

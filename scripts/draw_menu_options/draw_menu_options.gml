@@ -1,12 +1,8 @@
 /// @description Draws the options for the current menu using the outline shader that should be set BEFORE
-/// this function is called. It also handles the drawing of the menu's cursor, and the menu's scrollbar since
-/// both of those entities piggyback off of the options themselves in order to function properly.
+/// this function is called.
 /// @param sOutlineColor
-/// @param sDrawOutline
 
-var _sOutlineColor, _sDrawOutline;
-_sOutlineColor = argument0;
-_sDrawOutline = argument1;
+var _sOutlineColor = argument0;
 
 // Set the currently used alignment and font
 draw_set_halign(optionAlign[X]);
