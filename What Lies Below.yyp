@@ -527,6 +527,14 @@
             }
         },
         {
+            "Key": "3cc7f696-2d24-4346-9ad1-818532b301a2",
+            "Value": {
+                "id": "46bc3e75-d779-4619-b8c6-895f371432c8",
+                "resourcePath": "scripts\\set_camera_shake\\set_camera_shake.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "3d9bd6d3-222b-4672-9498-bf6b7cf4acc4",
             "Value": {
                 "id": "5ec0953d-7fbb-48df-b629-d029d771f38f",
@@ -938,7 +946,7 @@
             "Key": "8d57c3fc-1554-4954-9870-048830793651",
             "Value": {
                 "id": "5eedf8b8-c92e-4f0e-b978-8ffcb98a3b2e",
-                "resourcePath": "scripts\\draw_menu_scrollbar\\draw_menu_scrollbar.yy",
+                "resourcePath": "scripts\\draw_menu_scrollbars\\draw_menu_scrollbars.yy",
                 "resourceType": "GMScript"
             }
         },
@@ -1572,11 +1580,12 @@
         "9a2d49cf-6302-415d-942d-f73f52d931cc",
         "61e63cc2-3ab9-4c37-8f93-1154c8ff49e9",
         "4656fc21-884f-4632-856a-803b097a4492",
+        "e04016f5-d6f1-4569-9091-6c5d20b6d27b",
         "5e717814-d6fc-40a8-872d-8214267b8f57",
         "564727f2-106e-4820-9455-34a16fb64cdc",
         "1e21351f-de44-42df-b197-27d285540539",
+        "3cc7f696-2d24-4346-9ad1-818532b301a2",
         "fd632496-511b-41ff-9421-648bf4f73ac0",
-        "e04016f5-d6f1-4569-9091-6c5d20b6d27b",
         "eec69437-fcdc-4bed-b050-e9119861c7ce",
         "19639eb8-3005-431d-845a-e9e7baae8959",
         "b7cdca75-740e-49bd-9624-bde7d94708fc",

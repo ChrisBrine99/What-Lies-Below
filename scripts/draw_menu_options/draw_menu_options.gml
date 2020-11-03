@@ -9,16 +9,17 @@ draw_set_halign(optionAlign[X]);
 draw_set_valign(optionAlign[Y]);
 outline_set_font(optionFont, global.fontTextures[? optionFont], sPixelWidth, sPixelHeight);
 
-var _index, _curOption, _index2D;
-_index = 0;
-for (var yy = firstRowToDraw; yy < firstRowToDraw + numRowsToDraw; yy++){
+var _indexY, _indexX, _curOption, _index2D;
+_indexY = 0;
+_indexX = 0;
+for (var yy = firstDrawn[Y]; yy < firstDrawn[Y] + numDrawn[Y]; yy++){
 	// Go through every element on that row and draw it
-	for (var xx = 0; xx < menuWidth; xx++){
-		_curOption = (menuWidth * yy) + xx; // Gets the option's true index within the menu based on its width
+	for (var xx = firstDrawn[X]; xx < firstDrawn[X] + numDrawn[X]; xx++){
+		_curOption = (menuDimensions[X] * yy) + xx; // Gets the option's true index within the menu based on its width
 		_index2D = _curOption * 2;
 		
 		// Early exit if the _curOption variable is greater than the menu's size
-		if (_curOption >= menuSize){
+		if (_curOption >= numOptions){
 			break;
 		}
 		
@@ -26,7 +27,7 @@ for (var yy = firstRowToDraw; yy < firstRowToDraw + numRowsToDraw; yy++){
 		if (!optionActive[| _curOption]){
 			draw_set_color(optionInactiveCol);
 			shader_set_uniform_f_array(_sOutlineColor, optionInactiveOutlineCol);
-			draw_text(optionPos[X] + optionPosOffset[| _index2D] + (optionSpacing[X] * xx), optionPos[Y] + optionPosOffset[| _index2D + 1] + (optionSpacing[Y] * _index), option[| _curOption]);
+			draw_text(optionPos[X] + optionPosOffset[| _index2D] + (optionSpacing[X] * _indexX), optionPos[Y] + optionPosOffset[| _index2D + 1] + (optionSpacing[Y] * _indexY), option[| _curOption]);
 			continue;
 		}
 
@@ -44,12 +45,16 @@ for (var yy = firstRowToDraw; yy < firstRowToDraw + numRowsToDraw; yy++){
 			shader_set_uniform_f_array(_sOutlineColor, optionOutlineCol);
 		}
 		// Draw the text using its relative position variables
-		draw_text(optionPos[X] + optionPosOffset[| _index2D] + (optionSpacing[X] * xx), optionPos[Y] + optionPosOffset[| _index2D + 1] + (optionSpacing[Y] * _index), option[| _curOption]);
+		draw_text(optionPos[X] + optionPosOffset[| _index2D] + (optionSpacing[X] * _indexX), optionPos[Y] + optionPosOffset[| _index2D + 1] + (optionSpacing[Y] * _indexY), option[| _curOption]);
+	
+		// Finally, increment the X index variable
+		_indexX++;
 	}
 	// Early exit if the _curOption variable is greater than the menu's size
-	if (_curOption >= menuSize){
+	if (_curOption >= numOptions){
 		break;
 	}
-	// Finally, increment the index variable
-	_index++;
+	// Finally, increment the Y index and reset the X index
+	_indexY++;
+	_indexX = 0;
 }

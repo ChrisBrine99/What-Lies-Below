@@ -18,14 +18,18 @@ if (!newObjectSet && curObject != noone){ // Camera movement when locked onto an
 	// Horizontal camera movement
 	if (x < _newPosition[X] - _deadZone){ // Moving the camera to the left
 		x = _newPosition[X] - _deadZone;
+		shakeCenter[X] = x; // Update the camera shake's origin point's X position
 	} else if (x > _newPosition[X] + _deadZone){ // Moving the camera to the right
 		x = _newPosition[X] + _deadZone;
+		shakeCenter[X] = x; // Update the camera shake's origin point's X position
 	}
 	// Vertical camera movement
 	if (y < _newPosition[Y] - _deadZone){ // Moving the camera upward
 		y = _newPosition[Y] - _deadZone;
+		shakeCenter[Y] = y; // Update the camera shake's origin point's Y position
 	} else if (y > _newPosition[Y] + _deadZone){ // Moving the camera downward
 		y = _newPosition[Y] + _deadZone;
+		shakeCenter[Y] = y; // Update the camera shake's origin point's Y position
 	}
 } else{ // Camera movement when unlocked or moving to followed object
 	var _moveSpeed = moveSpeed * global.deltaTime;
@@ -55,6 +59,18 @@ if (!newObjectSet && curObject != noone){ // Camera movement when locked onto an
 		}
 		_positionReached = true;
 	}
+	
+	// When the camera is unlocked the shake's origin point will always be the center of the screen
+	shakeCenter[X] = x;
+	shakeCenter[Y] = y;
+}
+
+// Finally, after moving the camera to its next position for the frame, offset its position relative to the
+// current strength of the camera shake if one exists.
+if (shakeMagnitude > 0){
+	x = shakeCenter[X] - random_range(-shakeMagnitude, shakeMagnitude);
+	y = shakeCenter[Y] - random_range(-shakeMagnitude, shakeMagnitude);
+	shakeMagnitude -= (shakeStrength / shakeLength) * global.deltaTime;
 }
 
 // After moving the camera to a new postiion; update the view matrix

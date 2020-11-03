@@ -12,8 +12,8 @@ ds_list_delete(optionPosOffset, _index2D);
 ds_list_delete(optionPosOffset, _index2D + 1);
 
 // Update the total menu size and recalculate the total rows in the menu
-menuSize = ds_list_size(option);
-menuRows = floor(menuSize / menuWidth);
+numOptions = ds_list_size(option);
+menuDimensions[Y] = floor(numOptions / menuDimensions[X]);
 
 // Finally, remove option information data from its ds_list
 ds_list_delete(info, _index);

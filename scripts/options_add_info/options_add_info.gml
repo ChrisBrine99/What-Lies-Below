@@ -15,8 +15,8 @@ ds_list_add(optionActive, _isActive);
 ds_list_add(optionPosOffset, 0, 0);
 
 // Update the total menu size and recalculate the total rows in the menu
-menuSize = ds_list_size(option);
-menuRows = ceil(menuSize / menuWidth);
+numOptions = ds_list_size(option);
+menuDimensions[Y] = ceil(numOptions / menuDimensions[X]);
 
 // Finally, add the option information to its list as well
 ds_list_add(info, _optionInfo);

@@ -23,18 +23,17 @@ curState = -1;
 lastState = -1;
 // Menus can use the entity's set_cur_state to change state, much like an entity object
 
-// These variables keep track of the option that has been highlighted by the user, the option that was
-// selected by the user (if one has been selected), and the option that was selected by the user, but
-// another option has to be selected in order to use that auxillary option. Finally, the size of the 
-// menu is stored using the size of the option ds_list, the width is how many options exist on a single
-// row, and the rows stores the total number of rows in the menu.
+
+
 curOption = 0;
 prevOption = 0;
 selOption = -1;
 auxSelOption = -1;
-menuSize = 0;
-menuWidth = 0;
-menuRows = 0;
+
+firstDrawn = [0, 0];
+numDrawn = 0;			// A 2D vector [X, Y]
+scrollOffset = 0;		// A 2D vector [X, Y]
+menuDimensions = 0;		// A 2D vector [X, Y]
 
 // These variables are for automatically scrolling through the menu's options. The first is the time
 // (60 == 1 second) the menu movement key has been held for, the time it needs to be held in order to 
@@ -103,6 +102,8 @@ optionSpacing = 0;					// A 2D vector [X, Y]
 // The alignment of the options relative to their posiiton value, as well as the font used for the options.
 optionAlign = 0;					// A 2D vector [X, Y]
 optionFont = -1;
+// Redundant data that stores the size of the option ds_list for ease of use.
+numOptions = 0;
 
 // The colors used for options that aren't selected or being highlighted by the user current, but they are
 // currently visible.
@@ -124,28 +125,19 @@ optionAuxSelectOutlineCol = [0.5, 0, 0];
 optionHighlightCol = make_color_rgb(252, 224, 168);
 optionHighlightOutlineCol = [0.49, 0.44, 0.33];
 
-// Determines the first visible row of option that will be drawn, which is located wherever the zeroth 
-// element  would be drawn relative to the position of the options. The next variable determines how many 
-// rows of  options are visible at any given time. Finally, the offset is how many rows from the last or 
-// first visible one the cursor needs to be before the visible options will be shifted.
-firstRowToDraw = 0;
-numRowsToDraw = 0;
-scrollOffset = 0;
-
 // Variables relating to an optional menu cursor. The first variable is the sprite that is used as the 
 // highlighted option cursor. Finally, the last variable is a 2D vector to store the zeroth position of 
 // the cursor.
 cursorSprite = -1;
 cursorPos = 0;						// A 2D vector [X, Y]
 
-// Variables relating to an optional scrollbar that the menu can use to display the user's cursor's position
-// relative to the first, last menu options, and number of visible options. The first is a vector storing 
-// the position and size of the scrollbar on the screen. The second and third are the inner scrollbar and 
-// outer scrollbar colors, respectively. 
-scrollbar = 0;						// A 4D vector [X, Y, W, H]
-scrollbarInnerCol = c_white;
-scrollbarOuterCol = c_gray;
-scrollbarBackCol = c_black;
+
+hScrollbar = 0;						// A 4D vector [X, Y, W, H]
+vScrollbar = 0;						// A 4D vector [X, Y, W, H]
+
+// The colors used for the scrollbar itself and the background of the scrollbar's region.
+scrollbarCol = c_white;
+scrollbarBackCol = c_dkgray;
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -199,7 +191,7 @@ controlsOutlineCol = [0.5, 0.5, 0.5];
 // FOR TESTING OPTIONS/MENU MOVEMENT //////////////////////////////////////////////
 
 // Initialize the most important menu variables
-/*menu_initialize(-1, -1, 6, 10, 3, 15, 0.3);
+menu_initialize(-1, -1, 6, 3, 10, 1, 3, 15, 0.3);
 
 // Initialize the menu options
 menu_init_options(20, 15, fa_left, fa_top, 50, 10, font_gui_medium);
@@ -207,8 +199,9 @@ for (var i = 0; i < 75; i++){
 	options_add_info("TEST " + string(i), "TEST INFORMATION " + string(i), true);
 }
 
-// Initialize the menu's scrollbar
-menu_init_scrollbar(12, 15, 3, 103, c_white, c_gray, c_black);
+// Initialize the menu's scrollbars
+menu_init_scrollbar(12, 15, 3, 103, c_white, c_black, true);
+menu_init_scrollbar(18, 120, 144, 3, c_white, c_black, false);
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -222,6 +215,6 @@ controls_add_info(ord("X"), LEFT_ANCHOR, "Return", true);
 controls_add_info(vk_right, RIGHT_ANCHOR, "", false);
 controls_add_info(vk_left, RIGHT_ANCHOR, "", false);
 controls_add_info(vk_up, RIGHT_ANCHOR, "", false);
-controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", true);*/
+controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", true);
 
 ////////////////////////////////////////////////////////////////////////////////////

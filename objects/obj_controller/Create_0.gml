@@ -52,6 +52,17 @@ moveSpeed = 0.25;
 curObject = noone;
 deadZoneRadius = 8;
 
+// Variables that are involved in handling the screen's shaking effect. The first variable is a 2D vector 
+// that holds the center offset for the camera's shake. This is required due to the "dead-zone" in the center 
+// of the screen where the player can move, but the camera doesn't follow them. Moving on, the strength is 
+// the  magnitude of the shake as ssoon as it starts. The length is how much time is left in the shake. The 
+// length is how many seconds the shake will occur for. Finally, the remain holds the remaining shake relative 
+// to the initial magnitude and 0.
+shakeCenter = [0, 0];
+shakeStrength = 0;
+shakeLength = 0;
+shakeMagnitude = 0;
+
 // A flag that is set to true to move the camera to the newly set object's position without snapping.
 newObjectSet = false;
 

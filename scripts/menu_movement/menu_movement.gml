@@ -25,7 +25,7 @@ if (keySelect){
 }
 
 // Menu has one or less than one element OR holdTimer is set to -1; don't bother updating menu cursor
-if (menuSize <= 1){
+if (numOptions <= 1){
 	if (!keyRight && !keyLeft && !keyUp && !keyDown){ // Reset auto move key if all directions are released
 		holdTimer = 0;
 	}
@@ -47,44 +47,56 @@ if (keyRight || keyLeft || keyUp || keyDown){
 		
 		// Moving up/down to different rows in the menu
 		if ((keyUp && !keyDown) || (keyDown && !keyUp)){
-			curOption += (keyDown - keyUp) * menuWidth;
+			curOption += (keyDown - keyUp) * menuDimensions[X];
 			
-			var _curRow = floor(curOption / menuWidth);
-			if (keyUp && firstRowToDraw > 0 && _curRow <= firstRowToDraw + scrollOffset){				
-				firstRowToDraw--; // SHift the visible region of the menu up
-			} else if (keyDown && firstRowToDraw < menuRows - numRowsToDraw && _curRow >= firstRowToDraw + (numRowsToDraw - scrollOffset)){
-				firstRowToDraw++; // Shift the visible region of the menu down
+			var _curRow = floor(curOption / menuDimensions[X]);
+			if (keyUp && firstDrawn[Y] > 0 && _curRow < firstDrawn[Y] + scrollOffset[Y]){
+				firstDrawn[Y]--; // Shift the visible region upward
+			} else if (keyDown && firstDrawn[Y] < menuDimensions[Y] - numDrawn[Y] && _curRow >= firstDrawn[Y] + (numDrawn[Y] - scrollOffset[Y])){
+				firstDrawn[Y]++; // Shift the visible region downward
 			}
 			
-			if (curOption >= menuSize){ // Wrap the currently highlighted option to the lowest value for that column
-				curOption = curOption % menuWidth;
-				// Reset the visible menu's region back to a range of 0 to number of rows to draw
-				firstRowToDraw = 0;
+			if (curOption >= numOptions){ // Wrap the currently highlighted option to the lowest value for that column
+				curOption = curOption % menuDimensions[X];
+				// Reset the menu's visible vertical region back to a range of 0 to number of rows to draw
+				firstDrawn[Y] = 0;
 			} else if (curOption < 0){ // Wrap the currently highlighted option to the highest value of that column
-				curOption = ((menuRows - 1) * menuWidth) + prevOption;
-				if (curOption >= menuSize){
-					curOption -= menuWidth;
+				curOption = ((menuDimensions[Y] - 1) * menuDimensions[X]) + prevOption;
+				if (curOption >= numOptions){
+					curOption -= menuDimensions[X];
 				}
-				// Offset the visible region to its highest possible value, but no value below 0
-				firstRowToDraw = max(0, menuRows - numRowsToDraw);
+				// Offset the visible vertical region to its highest possible value, but no value below 0
+				firstDrawn[Y] = max(0, menuDimensions[Y] - numDrawn[Y]);
 			}
 		}
 		
 		// Moving left/right through the menu if there is more than one option per row
-		if (menuWidth > 1){
+		if (menuDimensions[X] > 1){
 			if ((keyLeft && !keyRight) || (!keyLeft && keyRight)){
 				curOption += keyRight - keyLeft;
+				
+				var _curColumn = curOption % menuDimensions[X];
+				if (keyLeft && firstDrawn[X] > 0 && _curColumn < firstDrawn[X] + scrollOffset[X]){
+					firstDrawn[X]--; // Shift the visible region to the left
+				} else if (keyRight && firstDrawn[X] < menuDimensions[X] - numDrawn[X] && _curColumn >= firstDrawn[X] + (numDrawn[X] - scrollOffset[X])){
+					firstDrawn[X]++; // Shift the visible region to the right
+				}
+				
 				// Check if the cursor needs to wrap around to the other side
-				if (keyRight && (curOption % menuWidth == 0 || curOption == menuSize)){
-					if (curOption >= menuSize - 1 && curOption % menuWidth != 0){ // Wrap around to the left-size relative to the amount of options on that row
-						curOption = (menuSize - 1) - ((menuSize - 1) % menuWidth);
+				if (keyRight && (curOption % menuDimensions[X] == 0 || curOption == numOptions)){
+					if (curOption >= numOptions - 1 && curOption % menuDimensions[X] != 0){ // Wrap around to the left-size relative to the amount of options on that row
+						curOption = (numOptions - 1) - ((numOptions - 1) % menuDimensions[X]);
 					} else{ // Wrap around to the left-side as normal
-						curOption -= menuWidth;
+						curOption -= menuDimensions[X];
 					}
-				} else if (keyLeft && (curOption % menuWidth == menuWidth - 1 || curOption == -1)){ // Wrap around to the right
-					curOption += menuWidth;
-					if (curOption >= menuSize - 1){ // Lock onto the option farthest to the right in the last row
-						curOption = menuSize - 1;
+					firstDrawn[X] = 0;
+				} else if (keyLeft && (curOption % menuDimensions[X] == menuDimensions[X] - 1 || curOption == -1)){ // Wrap around to the right
+					curOption += menuDimensions[X];
+					firstDrawn[X] = menuDimensions[X] - numDrawn[X];
+					if (curOption >= numOptions - 1){ // Lock onto the option farthest to the right in the last row
+						curOption = numOptions - 1;
+						// Fix the offset for the first drawn column of options
+						firstDrawn[X] = clamp((curOption % menuDimensions[X]) - scrollOffset[X], 0, menuDimensions[X] - numDrawn[X]);
 					}
 				}
 			}
