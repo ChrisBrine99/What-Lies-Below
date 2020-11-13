@@ -32,7 +32,7 @@ maxVspd = maxVspdConst;
 maxHitpoints = 20;
 hitpoints = maxHitpoints;
 
-// Temporarily setting claire to be invincible for testing
+// Temporarily setting Claire to be invincible for testing
 isInvincible = true;
 
 #endregion
@@ -113,13 +113,9 @@ sanityTimer = 0;
 
 // Variables relating to Claire's current internal temperature. When in rooms that are cold (Ex. normal world 
 // outside) or really hot (Ex. broken furnace room), her internal temperature will begin to slowly increse,
-// and she will being taking damage if she gets too hot or too cold.
+// and she will begin taking damage if she gets too hot or too cold.
 internalTemperature = 36.5;
 externalTemperature = ROOM_TEMPERATURE;
 temperatureTimer = 0;
-
-// FOR TESTING
-update_hitpoints(-15);
-update_hitpoint_regen_ratio(1, 1);
 
 #endregion

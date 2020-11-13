@@ -24,7 +24,7 @@ _outerAlpha = argument7;
 // Drawing outer rectangle/outer rectangles depending on alpha level
 if (_innerAlpha < 1){ // Inner rectangle is translucent/transparent; draw outline in four separate pieces
 	draw_sprite_ext(spr_rectangle, 0, _xPos, _yPos, _width, 1, 0, _outerCol, _outerAlpha);							// Top outline
-	draw_sprite_ext(spr_rectangle, 0, _xPos, _yPos + _height, _width, 1, 0, _outerCol, _outerAlpha);				// Bottom outline
+	draw_sprite_ext(spr_rectangle, 0, _xPos, _yPos + _height - 1, _width, 1, 0, _outerCol, _outerAlpha);			// Bottom outline
 	draw_sprite_ext(spr_rectangle, 0, _xPos, _yPos + 1, 1, _height - 2, 0, _outerCol, _outerAlpha);					// Left outline
 	draw_sprite_ext(spr_rectangle, 0, _xPos + _width - 1, _yPos + 1, 1, _height - 2, 0, _outerCol, _outerAlpha);	// Right outline
 } else{ // Inner rectangle is opaque, draw a single rectangle to represent the outline

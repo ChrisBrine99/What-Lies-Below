@@ -7,7 +7,7 @@
         "66c0e045-cee4-463c-ac6e-0babb750b46c"
     ],
     "filterType": "GMObject",
-    "folderName": "Effect Objects",
+    "folderName": "Effects",
     "isDefaultView": false,
     "localisedFolderName": ""
 }

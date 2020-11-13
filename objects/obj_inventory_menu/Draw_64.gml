@@ -2,8 +2,6 @@
 
 // Drawing menu backgrounds, images using draw_sprite_ext, etc. ////////////////////
 
-draw_menu_scrollbars();
-
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Drawing the menu's text-based elements //////////////////////////////////////////
@@ -15,7 +13,8 @@ shader_set_uniform_i(sDrawOutline, 1); // Make sure outline is always enabled
 draw_menu_options(sOutlineColor);
 draw_menu_controls(sOutlineColor);
 
-// Make sure to reset the horizontal alignment at the end of drawing text
+// Make sure to reset the horizontal alignment and the current shader at the end of drawing text
 draw_set_halign(fa_left);
+shader_reset();
 
 ////////////////////////////////////////////////////////////////////////////////////

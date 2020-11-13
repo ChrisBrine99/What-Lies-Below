@@ -16,4 +16,5 @@ instance_create_depth(0, 0, ENTITY_DEPTH, obj_depth_sorter);
 room_goto_next();
 
 // FOR TESTING
+instance_create_depth(0, 0, GLOBAL_DEPTH, obj_debugger);
 show_debug_overlay(true);

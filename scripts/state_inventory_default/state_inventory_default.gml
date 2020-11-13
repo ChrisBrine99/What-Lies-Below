@@ -9,11 +9,11 @@ menu_movement();
 if (keyReturn){
 	set_cur_state(-1);
 	// FOR TESTING
-	global.gameState = GameState.InMenu;
+	global.gameState = GameState.InGame;
 	return;
 }
 
 // Shifting to another section in the menu
 if (prevOption != curOption){
-	//set_cur_state(state_inventory_change_section);
+	set_cur_state(state_inventory_change_section);
 }

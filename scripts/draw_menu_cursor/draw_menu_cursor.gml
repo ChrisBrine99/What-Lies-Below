@@ -2,7 +2,7 @@
 /// before activating the menu's shader otherwise adverse effects may occur. No arguments needed.
 
 var _xPosition, _yPosition;
-_xPosition = (cursorPos[X] + optionPos[X]) + ((curOption % menuWidth) * optionSpacing[X]);
-_yPosition = (cursorPos[Y] + optionPos[Y]) + (floor(curOption / (menuWidth * menuRows)) * optionSpacing[Y]);
+_xPosition = (cursorPos[X] + optionPos[X]) + ((curOption % menuDimensions[X]) * optionSpacing[X]);
+_yPosition = (cursorPos[Y] + optionPos[Y]) + (floor(curOption / (menuDimensions[X] * menuDimensions[Y])) * optionSpacing[Y]);
 
 draw_sprite(cursorSprite, 0, _xPosition, _yPosition);

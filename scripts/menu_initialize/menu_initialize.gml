@@ -38,3 +38,6 @@ scrollOffset = [max(0, _scrollOffsetX), max(0, _scrollOffsetY)];
 // must be greater than 5 (60 = 1 second of real time) and 0.01 (smaller values = faster), respectively.
 timeToHold = max(5, _timeToHold);
 autoScrollSpeed = max(0.01, _autoScrollSpeed);
+
+// The first drawn vector will always be set to [0, 0] upon initialization
+firstDrawn = [0, 0];

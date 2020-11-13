@@ -28,7 +28,7 @@
 #macro	ANIMATION_FPS				60
 
 // Maximum player inventory size
-#macro	INVENTORY_SIZE				24
+#macro	INVENTORY_SIZE				28
 
 // Player status condition constants (60 = One Second of Real-Time)
 #macro	SANITY_TIMER				300

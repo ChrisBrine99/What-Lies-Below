@@ -23,14 +23,20 @@ curState = -1;
 lastState = -1;
 // Menus can use the entity's set_cur_state to change state, much like an entity object
 
-
-
+// Variables relating to the options that the user has currently highlighted, selected, and a previous auxillary
+// option that they have selected -- one that is needed for certain tasks. (Ex. Combining Items, Swapping Items 
+// Between Slots, etc.)
 curOption = 0;
 prevOption = 0;
 selOption = -1;
 auxSelOption = -1;
 
-firstDrawn = [0, 0];
+// Variables related to drawing the menu's visible region of options. The first vector determines the earliest
+// drawn row and column -- offset from the first element of each by the values. Then, the offset determines
+// how close to the border of the visible region the user needs to highlight before the visible region will
+// shift over by one row/column. The dimension vector just stores the total number of rows and columns found
+// in the menu.
+firstDrawn = 0;			// A 2D vector [X, Y]
 numDrawn = 0;			// A 2D vector [X, Y]
 scrollOffset = 0;		// A 2D vector [X, Y]
 menuDimensions = 0;		// A 2D vector [X, Y]
@@ -125,20 +131,6 @@ optionAuxSelectOutlineCol = [0.5, 0, 0];
 optionHighlightCol = make_color_rgb(252, 224, 168);
 optionHighlightOutlineCol = [0.49, 0.44, 0.33];
 
-// Variables relating to an optional menu cursor. The first variable is the sprite that is used as the 
-// highlighted option cursor. Finally, the last variable is a 2D vector to store the zeroth position of 
-// the cursor.
-cursorSprite = -1;
-cursorPos = 0;						// A 2D vector [X, Y]
-
-
-hScrollbar = 0;						// A 4D vector [X, Y, W, H]
-vScrollbar = 0;						// A 4D vector [X, Y, W, H]
-
-// The colors used for the scrollbar itself and the background of the scrollbar's region.
-scrollbarCol = c_white;
-scrollbarBackCol = c_dkgray;
-
 ////////////////////////////////////////////////////////////////////////////////////
 
 // VARIABLES FOR MENU OPTIONS INFO /////////////////////////////////////////////////
@@ -188,6 +180,8 @@ controlsOutlineCol = [0.5, 0.5, 0.5];
 
 #endregion
 
+/*
+
 // FOR TESTING OPTIONS/MENU MOVEMENT //////////////////////////////////////////////
 
 // Initialize the most important menu variables
@@ -198,10 +192,6 @@ menu_init_options(20, 15, fa_left, fa_top, 50, 10, font_gui_medium);
 for (var i = 0; i < 75; i++){
 	options_add_info("TEST " + string(i), "TEST INFORMATION " + string(i), true);
 }
-
-// Initialize the menu's scrollbars
-menu_init_scrollbar(12, 15, 3, 103, c_white, c_black, true);
-menu_init_scrollbar(18, 120, 144, 3, c_white, c_black, false);
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -218,3 +208,5 @@ controls_add_info(vk_up, RIGHT_ANCHOR, "", false);
 controls_add_info(vk_down, RIGHT_ANCHOR, "Move Cursor", true);
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+*/

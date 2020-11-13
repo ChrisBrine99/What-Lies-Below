@@ -41,7 +41,7 @@ if (global.gameState == GameState.InMenu){
 		// in order to use draw_sprite_ext. For some reason, it doesn't work whenever the
 		// outline shader isn't currently active.
 		event_perform(ev_draw, ev_gui);
-	}	
+	}
 }
 
 /// TODO -- Eventually this draw code should be written in such a way that allows any object/menu to be

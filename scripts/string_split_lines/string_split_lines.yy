@@ -1,8 +1,8 @@
 {
-    "id": "8d57c3fc-1554-4954-9870-048830793651",
+    "id": "aadf6319-b035-404e-8ad2-3fac89d03115",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "draw_menu_scrollbars",
+    "name": "string_split_lines",
     "IsCompatibility": false,
     "IsDnD": false
 }

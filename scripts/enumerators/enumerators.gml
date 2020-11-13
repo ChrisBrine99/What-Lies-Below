@@ -21,7 +21,7 @@ enum Settings{
 	Music,
 	EnableMusic,
 	// Keyboard Settings //
-	GameRight,
+	GameRight,		// In-Game Keybindings
 	GameLeft,
 	GameUp,
 	GameDown,
@@ -30,9 +30,21 @@ enum Settings{
 	ReadyWeapon,
 	Reload,
 	ChangeAmmo,
+	MenuDown,
+	MenuUp,			// Menu Keybindings
+	MenuLeft,
+	MenuRight,
+	Select,
+	Return,
+	FileDelete,
+	InvLeft,
+	InvRight,
 	// Accessibility Settings //
+	ObjectiveHints,
 	InteractableOutlining,
 	TextSpeed,
+	// Holds Total Number of Settings //
+	Length,
 }
 
 

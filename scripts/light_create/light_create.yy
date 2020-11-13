@@ -1,8 +1,8 @@
 {
-    "id": "6360acbe-ce04-4373-b272-15e102b16849",
+    "id": "c574514e-3930-419c-8e80-a415f5c36a20",
     "modelName": "GMScript",
     "mvc": "1.0",
-    "name": "menu_init_scrollbar",
+    "name": "light_create",
     "IsCompatibility": false,
     "IsDnD": false
 }

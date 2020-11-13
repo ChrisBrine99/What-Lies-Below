@@ -13,14 +13,14 @@ entity_world_collision(false);
 // Interacting with objects in the game world
 if (keyInteract){
 	// Check and see if there's an object in front of the player that can actually be interacted with
-	var _object = instance_place(x + lengthdir_x(6, direction), y + lengthdir_y(12, direction), par_interactable);
+	var _object = instance_place(x + lengthdir_x(6, direction), (y - 4) + lengthdir_y(6, direction), par_interactable);
 	if (_object != noone){
 		with(_object){ // If possible to interact with, execute the object's associated script
-			if (canInteract && script_exists(interactionScript)){
-				script_execute(interactionScript);
+			if (canInteract /*&& script_exists(interactionScript)*/){
+				show_debug_message("INTERACTED WITH!");
+				//script_execute(interactionScript);
 			}
 		}
-		show_debug_message("INTERACTED WITH!");
 	}
 }
 

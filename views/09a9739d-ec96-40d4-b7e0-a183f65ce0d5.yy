@@ -7,7 +7,7 @@
         
     ],
     "filterType": "GMScript",
-    "folderName": "par_interactable",
+    "folderName": "obj_item",
     "isDefaultView": false,
     "localisedFolderName": ""
 }

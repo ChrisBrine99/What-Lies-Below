@@ -19,6 +19,9 @@ interactionScript = -1;
 // children of this object is determined by the distance the object is from any light sources. If the object
 // isn't near any light, it is considered shrouded in darkness and the player will not be able to interact
 // with it.
-canInteract = true;
+canInteract = false;
+
+// Holds the instance ID for the light that is closest to this interactable object.
+closestLight = noone;
 
 #endregion
