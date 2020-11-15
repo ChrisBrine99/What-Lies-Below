@@ -20,10 +20,10 @@ void main(){
 	float gray = dot (baseColor, vec3(0.299, 0.587, 0.114));
 	
 	// Determine the initial out color based on the grayscale value, base color, and lighting color
-	vec3 outColor = gray > 0.5 ? 1.0 - (1.0 - 2.0 * (baseColor * 0.5)) * (1.0 - color) : 2.0 * baseColor * color;
+	vec3 outColor = gray > 0.5 ? 1.0 - (1.0 - 2.0 * (baseColor - 0.5)) * (1.0 - color) : 2.0 * baseColor * color;
 	// Add saturation, contrast, and brightness; in that order
 	outColor = mix(vec3(gray), outColor, saturation);
-	outColor = (outColor - 0.5) * contrast * 0.5;
+	outColor = (outColor - 0.5) * contrast + 0.5;
 	outColor = outColor + brightness;
 	
 	// Finally, incorporate the lights into the outColor values

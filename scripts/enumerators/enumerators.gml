@@ -1,4 +1,6 @@
+/// @description Enumerators used by the game's various systems.
 
+// Stores the state of the game on a global scale at the given moment
 enum GameState{
 	InGame,
 	InMenu,

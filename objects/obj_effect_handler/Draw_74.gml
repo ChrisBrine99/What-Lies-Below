@@ -34,7 +34,7 @@ surface_reset_target();
 //		5	--		Image Correction
 
 if (lightingEnabled){ // Activate lighting system if currently enabled
-	lighting_system([0, 0, 0], -0.05, 0.4, 0.25);
+	lighting_system([0, 0, 0], -0.6, 0.1, 0.25);
 }
 
 // TODO -- Add toggle for bloom effect here

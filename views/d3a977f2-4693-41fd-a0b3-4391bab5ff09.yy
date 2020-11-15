@@ -7,7 +7,7 @@
         "4467f665-6117-47f3-8161-0d167c00adfc"
     ],
     "filterType": "GMScript",
-    "folderName": "Effect Objects",
+    "folderName": "Effects",
     "isDefaultView": false,
     "localisedFolderName": ""
 }

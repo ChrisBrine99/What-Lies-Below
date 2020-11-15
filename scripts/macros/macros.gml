@@ -20,8 +20,6 @@
 // Vector array indexes
 #macro	X							0
 #macro	Y							1
-#macro	Z							2
-#macro	W							3
 
 // Animation contants
 #macro	DIRECTIONS					4
